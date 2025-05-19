@@ -2,8 +2,16 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePassword } from '@/context/PasswordContext';
+import PasswordProtection from '@/components/PasswordProtection';
 
 export default function Home() {
+  const { isAuthenticated } = usePassword();
+
+  if (!isAuthenticated) {
+    return <PasswordProtection />;
+  }
+
   return (
     <main>
       <header className="hero">
