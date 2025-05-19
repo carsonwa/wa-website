@@ -6,6 +6,7 @@ import { usePassword } from '@/context/PasswordContext';
 import { useSignupModal } from '@/context/SignupModalContext';
 import { useState } from 'react';
 import PasswordProtection from '@/components/PasswordProtection';
+import Testimonials from '@/components/Testimonials';
 
 export default function Home() {
   const { isAuthenticated } = usePassword();
@@ -280,6 +281,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Testimonials />
 
       <section className="section testimonials">
         <h2>Why Side Hustlers and Creators Choose WA</h2>
