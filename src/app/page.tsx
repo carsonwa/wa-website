@@ -3,44 +3,146 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePassword } from '@/context/PasswordContext';
+import { useSignupModal } from '@/context/SignupModalContext';
+import { useState } from 'react';
 import PasswordProtection from '@/components/PasswordProtection';
 
 export default function Home() {
   const { isAuthenticated } = usePassword();
+  const { openModal: openSignupModal } = useSignupModal();
+  const [email, setEmail] = useState('');
 
   if (!isAuthenticated) {
     return <PasswordProtection />;
   }
+
+  const handleEmailSignup = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      openSignupModal('email', email);
+    }
+  };
+
+  const handleSocialSignup = (provider: 'google' | 'facebook') => {
+    openSignupModal(provider);
+  };
 
   return (
     <main>
       <header className="hero">
         <h1>Create. Launch. Earn. Your Side Hustle Starts Here.</h1>
         <p>Build a blog, channel, product, or service with AI-powered tools, expert training, and a creator community that's always in your corner.</p>
-        <Link href="#get-started">Start Your Side Hustle Free</Link>
+        <div className="max-w-md mx-auto mt-8">
+          <div className="bg-gradient-to-b from-indigo-900 to-indigo-800 rounded-xl p-6 border border-white/30 shadow-lg">
+            <div className="space-y-4">
+              <button 
+                onClick={() => handleSocialSignup('google')}
+                className="w-full flex items-center justify-center gap-3 bg-white text-gray-700 hover:bg-gray-100 px-6 py-3 rounded-lg text-lg font-semibold transition-all"
+              >
+                <i className="fab fa-google text-xl"></i>
+                Continue with Google
+              </button>
+              <button 
+                onClick={() => handleSocialSignup('facebook')}
+                className="w-full flex items-center justify-center gap-3 bg-[#1877F2] hover:bg-[#1864F2] text-white px-6 py-3 rounded-lg text-lg font-semibold transition-all"
+              >
+                <i className="fab fa-facebook text-xl"></i>
+                Continue with Facebook
+              </button>
+              <div className="flex items-center gap-4">
+                <div className="flex-1 h-px bg-white/20"></div>
+                <span className="text-white/60 text-sm">or</span>
+                <div className="flex-1 h-px bg-white/20"></div>
+              </div>
+              <form onSubmit={handleEmailSignup} className="space-y-3">
+                <div className="relative">
+                  <input
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-6 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/60 focus:outline-none focus:border-white/30 transition-all"
+                    required
+                  />
+                </div>
+                <button 
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-3 bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg font-semibold transition-all"
+                >
+                  <i className="fas fa-envelope text-xl"></i>
+                  Sign up with Email
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </header>
 
       <section className="section">
         <h2>How Side Hustlers & Creators Get Started</h2>
         <div className="features">
           <div className="feature">
+            <div className="relative w-full h-32 mb-4">
+              <Image
+                src="/illustrations/goals.svg"
+                alt="Choose Your Focus"
+                fill
+                className="object-contain"
+              />
+            </div>
             <h3>Choose Your Focus</h3>
             <p>Pick from affiliate marketing, content creation, e-commerce, or digital products.</p>
           </div>
           <div className="feature">
+            <div className="relative w-full h-32 mb-4">
+              <Image
+                src="/illustrations/ai.svg"
+                alt="AI Setup Help"
+                fill
+                className="object-contain"
+              />
+            </div>
             <h3>AI Setup Help</h3>
             <p>WA AI recommends niches, builds websites, and drafts your first content with you.</p>
           </div>
           <div className="feature">
+            <div className="relative w-full h-32 mb-4">
+              <Image
+                src="/illustrations/teamwork.svg"
+                alt="Training + Community"
+                fill
+                className="object-contain"
+              />
+            </div>
             <h3>Training + Community</h3>
             <p>Follow step-by-step paths while learning from peers and mentors.</p>
+          </div>
+          <div className="feature">
+            <div className="relative w-full h-32 mb-4">
+              <Image
+                src="/illustrations/business_chat.svg"
+                alt="AI Business Coach"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <h3>AI Business Coach</h3>
+            <p>Get instant, tailored guidance from a built-in AI that helps map out your business strategy and next steps in real time.</p>
           </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section relative">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <Image
+            src="/illustrations/innovation.svg"
+            alt="Background"
+            fill
+            className="object-cover"
+          />
+        </div>
         <h2>Tools That Help You Launch Faster and Smarter</h2>
-        <div className="tile-grid">
+        <div className="tile-grid relative z-10">
           <div className="tile">
             <h3>AI Business Coach</h3>
             <p>Get instant, tailored guidance from a built-in AI that helps map out your business strategy and next steps in real time.</p>
@@ -60,9 +162,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
-        <h2>Your Creator Business, All in One Place</h2>
-        <div className="triple-row">
+      <section className="section flex flex-col items-center gap-8">
+        <h2 className="mb-2 text-center">Your Creator Business, All in One Place</h2>
+        <div className="w-full max-w-xl h-64 relative mx-auto">
+          <Image
+            src="/illustrations/content-creator.svg"
+            alt="Content Creator"
+            fill
+            className="object-contain"
+          />
+        </div>
+        <div className="w-full max-w-2xl flex flex-col gap-8">
           <div className="block">
             <h3>Plan. Write. Publish.</h3>
             <p>With our integrated AI content planner and SiteContent editor, you can move from idea to publish-ready article or video script in minutes.</p>
@@ -82,18 +192,50 @@ export default function Home() {
         <h2>Smart Tools + Real Support for Every Hustle</h2>
         <div className="grid-4">
           <div className="grid-item">
+            <div className="relative w-full h-32 mb-4">
+              <Image
+                src="/illustrations/seo.svg"
+                alt="SEO-Optimized Hosting"
+                fill
+                className="object-contain"
+              />
+            </div>
             <h3>SEO-Optimized Hosting</h3>
             <p>Fast, secure, and scalable infrastructure designed for search visibility, uptime, and speed, no plugins or setups required.</p>
           </div>
           <div className="grid-item">
+            <div className="relative w-full h-32 mb-4">
+              <Image
+                src="/illustrations/research.svg"
+                alt="AI Content & Research"
+                fill
+                className="object-contain"
+              />
+            </div>
             <h3>AI Content & Research</h3>
             <p>Tap into Author AI and Jaaxy tools to write, research, and optimize content across blogs, pages, and social media channels.</p>
           </div>
           <div className="grid-item">
+            <div className="relative w-full h-32 mb-4">
+              <Image
+                src="/illustrations/community.svg"
+                alt="24/7 Community & Support"
+                fill
+                className="object-contain"
+              />
+            </div>
             <h3>24/7 Community & Support</h3>
             <p>Ask questions, join discussions, or get direct help from fellow entrepreneurs and experienced mentors around the clock.</p>
           </div>
           <div className="grid-item">
+            <div className="relative w-full h-32 mb-4">
+              <Image
+                src="/illustrations/mentorship.svg"
+                alt="Mentorship Marketplace"
+                fill
+                className="object-contain"
+              />
+            </div>
             <h3>Mentorship Marketplace</h3>
             <p>Upgrade your progress with optional coaching and feedback from vetted experts, tailored help when you need it most.</p>
           </div>
