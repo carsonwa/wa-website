@@ -1,26 +1,183 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground-rgb: 17, 17, 17;
+  --background-rgb: 255, 255, 255;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.testimonial-card {
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: scale(1.03);
+}
+
+.pricing-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.nav-link:hover {
+  color: #4f46e5;
+}
+
+.btn-primary {
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Modal styles */
+.modal {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-content {
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal.active .modal-content {
+  transform: translateY(0);
+}
+
+/* Form transitions */
+.form-step {
+  transition: all 0.3s ease;
+}
+
+.form-step.hidden {
+  opacity: 0;
+  transform: translateX(20px);
+  position: absolute;
+  pointer-events: none;
+}
+
+.form-step.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Social buttons */
+.social-btn {
+  transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+}
+
+.social-btn.google:hover {
+  background-color: #f1f1f1;
+}
+
+.social-btn.facebook {
+  background-color: #1877f2;
+  color: white;
+}
+
+.social-btn.facebook:hover {
+  background-color: #166fe5;
+}
+
+@layer components {
+  .hero {
+    @apply text-center text-white py-24 px-8;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://cdn5.wealthyaffiliate.com/app/www/production/_next/static/media/business.2c4dff9e.webp') center/cover no-repeat;
+  }
+
+  .hero h1 {
+    @apply text-4xl max-w-3xl mx-auto mb-4;
+  }
+
+  .hero p {
+    @apply text-xl max-w-2xl mx-auto mb-8;
+  }
+
+  .hero a {
+    @apply bg-blue-600 text-white px-6 py-3 font-bold rounded transition-all duration-200 inline-block;
+  }
+
+  .hero a:hover {
+    @apply -translate-y-0.5 shadow-lg;
+  }
+
+  .section {
+    @apply py-16 px-4 max-w-7xl mx-auto;
+  }
+
+  .section:nth-of-type(2n) {
+    background: linear-gradient(to bottom, #f0f4ff, #ffffff);
+  }
+
+  .section:nth-of-type(4n) {
+    background: linear-gradient(to bottom, #e6f5ec, #ffffff);
+  }
+
+  .section:nth-of-type(6n) {
+    background: linear-gradient(to bottom, #f5e6ff, #ffffff);
+  }
+
+  .section h2 {
+    @apply text-center text-3xl mb-8;
+  }
+
+  .features, .tile-grid, .triple-row, .grid-4, .cards, .faq-grid {
+    @apply flex flex-wrap gap-8 justify-center;
+  }
+
+  .feature, .tile, .block, .grid-item, .card, .faq {
+    @apply bg-white rounded-lg shadow-sm p-6 flex-1 min-w-[250px] transition-all duration-200;
+  }
+
+  .feature:hover, .tile:hover, .block:hover, .grid-item:hover, .card:hover, .faq:hover {
+    @apply scale-105 shadow-lg;
+  }
+
+  .feature h3, .tile h3, .block h3, .grid-item h3, .card h3, .faq h3 {
+    @apply mt-0 text-blue-600;
+  }
+
+  .testimonial {
+    @apply border-l-4 border-blue-600 p-4 mb-4;
+  }
+
+  .member-img {
+    @apply w-16 h-16 rounded-full mb-4;
+  }
+
+  footer {
+    @apply bg-gray-900 text-white text-center py-8;
+  }
 }
