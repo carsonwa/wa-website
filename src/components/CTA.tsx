@@ -5,6 +5,10 @@ import { useSignupModal } from '@/context/SignupModalContext';
 export default function CTA() {
   const { openModal } = useSignupModal();
 
+  const handleClick = () => {
+    openModal();
+  };
+
   return (
     <section className="py-20 bg-indigo-600">
       <div className="container mx-auto px-4 text-center">
@@ -16,7 +20,7 @@ export default function CTA() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
-            onClick={openModal}
+            onClick={handleClick}
             className="btn-primary bg-white text-indigo-600 hover:bg-indigo-50 px-10 py-4 rounded-lg text-lg font-bold shadow-lg transition-all"
           >
             Start Your Journey Free
