@@ -170,81 +170,73 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Real Success Stories</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            See how our members are achieving remarkable results across different platforms
-          </p>
-        </div>
+    <section className="section pt-20" id="success-stories">
+      <h2>Stories from Wealthy Affiliate Members</h2>
+      <div className="relative">
+        <button
+          onClick={() => scroll('left')}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all"
+        >
+          <i className="fas fa-chevron-left"></i>
+        </button>
 
-        <div className="relative">
-          <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all"
-          >
-            <i className="fas fa-chevron-left"></i>
-          </button>
-
-          <div 
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto pb-8 px-4 scrollbar-hide"
-          >
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className={`flex-none w-[400px] bg-gradient-to-br ${testimonial.gradient} p-6 rounded-xl text-white shadow-lg`}
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-16 h-16 rounded-full border-2 border-white"
-                  />
-                  <div>
-                    <h3 className="text-xl font-bold">{testimonial.name}</h3>
-                    <p className="text-white/80">{testimonial.role}</p>
-                  </div>
+        <div 
+          ref={scrollContainerRef}
+          className="flex gap-6 overflow-x-auto pb-8 px-4 scrollbar-hide"
+        >
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className={`flex-none w-[400px] bg-gradient-to-br ${testimonial.gradient} p-6 rounded-xl text-white shadow-lg`}
+            >
+              <div className="flex items-start gap-4 mb-4">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className="w-16 h-16 rounded-full border-2 border-white"
+                />
+                <div>
+                  <h3 className="text-xl font-bold">{testimonial.name}</h3>
+                  <p className="text-white/80">{testimonial.role}</p>
                 </div>
+              </div>
 
-                <p className="text-lg mb-4">
-                  {expandedId === index ? testimonial.fullQuote : testimonial.quote}
-                </p>
+              <p className="text-lg mb-4">
+                {expandedId === index ? testimonial.fullQuote : testimonial.quote}
+              </p>
 
-                <button
-                  onClick={() => setExpandedId(expandedId === index ? null : index)}
-                  className="text-white/90 hover:text-white font-medium"
-                >
-                  {expandedId === index ? 'Read Less' : 'Read More'}
-                </button>
+              <button
+                onClick={() => setExpandedId(expandedId === index ? null : index)}
+                className="text-white/90 hover:text-white font-medium"
+              >
+                {expandedId === index ? 'Read Less' : 'Read More'}
+              </button>
 
-                <div className="mt-6 pt-6 border-t border-white/20">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <i className={`fab fa-${testimonial.platform} text-2xl`}></i>
-                      <span className="text-sm font-medium">Member Testimonial</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <i className="fas fa-star text-yellow-300"></i>
-                      <i className="fas fa-star text-yellow-300"></i>
-                      <i className="fas fa-star text-yellow-300"></i>
-                      <i className="fas fa-star text-yellow-300"></i>
-                      <i className="fas fa-star text-yellow-300"></i>
-                    </div>
+              <div className="mt-6 pt-6 border-t border-white/20">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <i className={`fab fa-${testimonial.platform} text-2xl`}></i>
+                    <span className="text-sm font-medium">Member Testimonial</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <i className="fas fa-star text-yellow-300"></i>
+                    <i className="fas fa-star text-yellow-300"></i>
+                    <i className="fas fa-star text-yellow-300"></i>
+                    <i className="fas fa-star text-yellow-300"></i>
+                    <i className="fas fa-star text-yellow-300"></i>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          <button
-            onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all"
-          >
-            <i className="fas fa-chevron-right"></i>
-          </button>
+            </div>
+          ))}
         </div>
+
+        <button
+          onClick={() => scroll('right')}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all"
+        >
+          <i className="fas fa-chevron-right"></i>
+        </button>
       </div>
     </section>
   );
