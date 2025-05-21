@@ -2,18 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section[id]');
-      const scrollPosition = window.scrollY + 100; // Offset for better detection
+      const scrollPosition = window.scrollY + 150; // Increased offset for better visibility
 
       sections.forEach((section) => {
         const sectionElement = section as HTMLElement;
@@ -30,6 +31,19 @@ export default function Navigation() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Handle hash navigation after page load
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [pathname]);
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -56,27 +70,21 @@ export default function Navigation() {
     e.preventDefault();
     
     if (href.startsWith('#')) {
-      // If we're on the contact page, first navigate to home
       if (pathname === '/contact') {
-        router.push('/');
-        // Wait for navigation to complete before scrolling
-        setTimeout(() => {
-          const element = document.querySelector(href);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
+        // Navigate to home page with hash
+        router.push(`/${href}`);
       } else {
-        // If we're already on home, just scroll
+        // If already on home page, just scroll
         const element = document.querySelector(href);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }
     } else {
-      // For page navigation, use Next.js router
       router.push(href);
     }
+    // Close mobile menu after navigation
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -106,8 +114,11 @@ export default function Navigation() {
               <a href="#support" className={getLinkClasses('#support')} onClick={(e) => handleNavClick(e, '#support')}>
                 Support
               </a>
-              <a href="#testimonials" className={getLinkClasses('#testimonials')} onClick={(e) => handleNavClick(e, '#testimonials')}>
+              <a href="#success-stories" className={getLinkClasses('#success-stories')} onClick={(e) => handleNavClick(e, '#success-stories')}>
                 Stories
+              </a>
+              <a href="#why-choose" className={getLinkClasses('#why-choose')} onClick={(e) => handleNavClick(e, '#why-choose')}>
+                Why Choose Us
               </a>
               <a href="#faqs" className={getLinkClasses('#faqs')} onClick={(e) => handleNavClick(e, '#faqs')}>
                 FAQs
@@ -117,42 +128,29 @@ export default function Navigation() {
               </a>
             </div>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+          <div className="flex items-center">
             <a
               href="https://my.wealthyaffiliate.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+              className="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-md text-sm font-medium mr-2"
             >
-              Member Login
+              Login
             </a>
-          </div>
-          <div className="-mr-2 flex items-center sm:hidden">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className={`${isMobileMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            <div className="-mr-2 flex items-center sm:hidden">
+              <button
+                type="button"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-              <svg
-                className={`${isMobileMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+                <span className="sr-only">Open main menu</span>
+                <div className="w-3 h-3 flex flex-col justify-center items-center">
+                  <span className={`block w-3 h-[1px] bg-gray-400 transform transition duration-300 ease-in-out ${isMobileMenuOpen ? 'rotate-45 translate-y-[1px]' : ''}`}></span>
+                  <span className={`block w-3 h-[1px] bg-gray-400 mt-[1px] transition duration-300 ease-in-out ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
+                  <span className={`block w-3 h-[1px] bg-gray-400 mt-[1px] transform transition duration-300 ease-in-out ${isMobileMenuOpen ? '-rotate-45 -translate-y-[1px]' : ''}`}></span>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -175,8 +173,11 @@ export default function Navigation() {
           <a href="#support" className={`nav-link block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${isActive('#support') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'}`} onClick={(e) => handleNavClick(e, '#support')}>
             Support
           </a>
-          <a href="#testimonials" className={`nav-link block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${isActive('#testimonials') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'}`} onClick={(e) => handleNavClick(e, '#testimonials')}>
+          <a href="#success-stories" className={`nav-link block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${isActive('#success-stories') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'}`} onClick={(e) => handleNavClick(e, '#success-stories')}>
             Stories
+          </a>
+          <a href="#why-choose" className={`nav-link block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${isActive('#why-choose') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'}`} onClick={(e) => handleNavClick(e, '#why-choose')}>
+            Why Choose Us
           </a>
           <a href="#faqs" className={`nav-link block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${isActive('#faqs') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'}`} onClick={(e) => handleNavClick(e, '#faqs')}>
             FAQs
@@ -184,18 +185,6 @@ export default function Navigation() {
           <a href="/contact" className={`nav-link block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${isActive('/contact') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'}`} onClick={(e) => handleNavClick(e, '/contact')}>
             Contact
           </a>
-        </div>
-        <div className="pt-4 pb-3 border-t border-gray-200">
-          <div className="flex items-center px-4">
-            <a
-              href="https://my.wealthyaffiliate.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium w-full text-center"
-            >
-              Member Login
-            </a>
-          </div>
         </div>
       </div>
     </nav>
