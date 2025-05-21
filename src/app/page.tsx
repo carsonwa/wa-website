@@ -32,8 +32,10 @@ export default function Home() {
   return (
     <main>
       <Navigation />
-      <header className="hero">
-        <h1>Create. Launch. Earn. Your Side Hustle Starts Here.</h1>
+      <header className="hero pt-8 md:pt-20">
+        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+          Create. Launch. Earn. Your Online Side Hustle Starts Here.
+        </h1>
         <p>Build a blog, channel, product, or service with AI-powered tools, expert training, and a creator community that's always in your corner.</p>
         <div className="max-w-md mx-auto mt-8">
           <div className="bg-gradient-to-b from-indigo-900 to-indigo-800 rounded-xl p-6 border border-white/30 shadow-lg">
@@ -47,10 +49,12 @@ export default function Home() {
               </button>
               <button 
                 onClick={() => handleSocialSignup('facebook')}
-                className="w-full flex items-center justify-center gap-3 bg-[#1877F2] hover:bg-[#1864F2] text-white px-6 py-3 rounded-lg text-lg font-semibold transition-all"
+                className="w-full flex items-center justify-center gap-3 bg-[#1877F2] hover:bg-[#1864F2] text-white px-6 py-3 rounded-lg text-lg font-semibold transition-all whitespace-nowrap"
               >
-                <i className="fab fa-facebook text-xl"></i>
-                Continue with Facebook
+                <span className="flex items-center gap-3 whitespace-nowrap">
+                  <i className="fab fa-facebook text-xl"></i>
+                  Continue with Facebook
+                </span>
               </button>
               <div className="flex items-center gap-4">
                 <div className="flex-1 h-px bg-white/20"></div>
@@ -234,13 +238,13 @@ export default function Home() {
             <div className="relative w-full h-32 mb-4">
               <Image
                 src="/illustrations/mentorship.svg"
-                alt="Mentorship Marketplace"
+                alt="Expert Guidance & Coaching"
                 fill
                 className="object-contain"
               />
             </div>
-            <h3>Mentorship Marketplace</h3>
-            <p>Upgrade your progress with optional coaching and feedback from vetted experts, tailored help when you need it most.</p>
+            <h3>Expert Guidance & Coaching</h3>
+            <p>Get 1-on-1 coaching, feedback, and tailored help from vetted experts, available 24/7 when you need it most.</p>
           </div>
         </div>
       </section>
