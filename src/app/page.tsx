@@ -7,6 +7,7 @@ import { useSignupModal } from '@/context/SignupModalContext';
 import { useState } from 'react';
 import PasswordProtection from '@/components/PasswordProtection';
 import Testimonials from '@/components/Testimonials';
+import Navigation from '@/components/Navigation';
 
 export default function Home() {
   const { isAuthenticated } = usePassword();
@@ -30,6 +31,7 @@ export default function Home() {
 
   return (
     <main>
+      <Navigation />
       <header className="hero">
         <h1>Create. Launch. Earn. Your Side Hustle Starts Here.</h1>
         <p>Build a blog, channel, product, or service with AI-powered tools, expert training, and a creator community that's always in your corner.</p>
@@ -79,7 +81,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="section">
+      <section className="section" id="how-it-works">
         <h2>How Side Hustlers & Creators Get Started</h2>
         <div className="features">
           <div className="feature">
@@ -133,7 +135,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section relative">
+      <section className="section relative rounded-3xl overflow-hidden" id="tools">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <Image
             src="/illustrations/innovation.svg"
@@ -163,7 +165,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section flex flex-col items-center gap-8">
+      <section className="section flex flex-col items-center gap-8" id="platform">
         <h2 className="mb-2 text-center">Your Creator Business, All in One Place</h2>
         <div className="w-full max-w-xl h-64 relative mx-auto">
           <Image
@@ -189,7 +191,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section rounded-3xl overflow-hidden" id="support">
         <h2>Smart Tools + Real Support for Every Hustle</h2>
         <div className="grid-4">
           <div className="grid-item">
@@ -243,64 +245,93 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
-        <h2>From First Steps to First Sales</h2>
-        <div className="cards">
-          <div className="card">
-            <Image
-              src="https://randomuser.me/api/portraits/women/68.jpg"
-              alt="Maria R"
-              width={64}
-              height={64}
-              className="member-img"
-            />
-            <h3>Maria R.</h3>
-            <p>Parenting blogger turned digital creator. Launched her first niche site and now earns consistent affiliate income with content she built using WA's AI tools.</p>
-          </div>
-          <div className="card">
-            <Image
-              src="https://randomuser.me/api/portraits/men/44.jpg"
-              alt="Devon S"
-              width={64}
-              height={64}
-              className="member-img"
-            />
-            <h3>Devon S.</h3>
-            <p>Personal finance YouTuber who expanded to digital products and memberships with WA's funnel templates and SEO tools.</p>
-          </div>
-          <div className="card">
-            <Image
-              src="https://randomuser.me/api/portraits/women/33.jpg"
-              alt="Lila G"
-              width={64}
-              height={64}
-              className="member-img"
-            />
-            <h3>Lila G.</h3>
-            <p>Freelancer who built an online course in 3 months using WA's training and mentorship. Now growing a full-time business from her side hustle roots.</p>
-          </div>
-        </div>
-      </section>
+      <div className="pt-8 pb-16 bg-gradient-to-b from-gray-50 to-white">
+        <Testimonials />
+      </div>
 
-      <Testimonials />
-
-      <section className="section testimonials">
+      <section className="section testimonials rounded-3xl overflow-hidden">
         <h2>Why Side Hustlers and Creators Choose WA</h2>
-        <div className="testimonial">
-          <p>"WA gave me clarity and confidence. I turned my weekend writing hobby into a blog that pays my rent."</p>
-          <strong>- Maria R., Creator & Blogger</strong>
-        </div>
-        <div className="testimonial">
-          <p>"The people, the AI tools, the structure—I finally stopped spinning my wheels and launched a real product."</p>
-          <strong>- Devon S., YouTube Coach</strong>
-        </div>
-        <div className="testimonial">
-          <p>"As a total beginner, I launched a niche site in weeks. Now it's my main side income, and growing fast."</p>
-          <strong>- Lila G., Side Hustler</strong>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="space-y-6">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <i className="fas fa-check text-green-600 text-sm"></i>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">Trending Content Strategies</h3>
+                <p className="text-gray-600">Master current algorithms and viral content formats across TikTok, Instagram, YouTube, and more.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <i className="fas fa-check text-green-600 text-sm"></i>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">AI Content Creation</h3>
+                <p className="text-gray-600">Generate engaging content, scripts, and captions that resonate with today's audiences using cutting-edge AI tools.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <i className="fas fa-check text-green-600 text-sm"></i>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">Multi-Platform Growth</h3>
+                <p className="text-gray-600">Build authentic followings across platforms with strategies that work in 2025's social media landscape.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <i className="fas fa-check text-green-600 text-sm"></i>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">Creator Economy Tools</h3>
+                <p className="text-gray-600">Access tools for monetizing through sponsorships, digital products, and creator memberships.</p>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-6">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <i className="fas fa-check text-green-600 text-sm"></i>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">Real-Time Trend Analysis</h3>
+                <p className="text-gray-600">Stay ahead with AI-powered insights into emerging topics and viral content opportunities.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <i className="fas fa-check text-green-600 text-sm"></i>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">Engagement Optimization</h3>
+                <p className="text-gray-600">Learn current best practices for maximizing reach and engagement across all major platforms.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <i className="fas fa-check text-green-600 text-sm"></i>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">Creator Community</h3>
+                <p className="text-gray-600">Connect with successful creators who are actively growing their audiences in today's digital landscape.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <i className="fas fa-check text-green-600 text-sm"></i>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg mb-1">Start Free Today</h3>
+                <p className="text-gray-600">Begin your creator journey with our latest tools and training - no credit card required.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section rounded-3xl overflow-hidden" id="faqs">
         <h2>FAQs: Everything You Need to Know</h2>
         <div className="faq-grid">
           <div className="faq">
