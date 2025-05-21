@@ -250,7 +250,7 @@ export default function Home() {
       </section>
 
       <div className="pt-8 pb-16 bg-gradient-to-b from-gray-50 to-white">
-        <Testimonials />
+      <Testimonials />
       </div>
 
       <section className="section testimonials rounded-3xl overflow-hidden">
