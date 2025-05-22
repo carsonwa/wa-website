@@ -8,6 +8,7 @@ import { useState } from 'react';
 import PasswordProtection from '@/components/PasswordProtection';
 import Testimonials from '@/components/Testimonials';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   const { isAuthenticated } = usePassword();
@@ -253,7 +254,7 @@ export default function Home() {
       <Testimonials />
       </div>
 
-      <section className="section testimonials rounded-3xl overflow-hidden">
+      <section className="section testimonials rounded-3xl overflow-hidden" id="why-choose">
         <h2>Why Side Hustlers and Creators Choose WA</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <div className="space-y-6">
@@ -376,7 +377,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <p>&copy; 2025 Wealthy Affiliate. All rights reserved.</p>
+        <Footer />
       </footer>
     </main>
   );

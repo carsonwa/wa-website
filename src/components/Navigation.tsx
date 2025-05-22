@@ -68,13 +68,10 @@ export default function Navigation() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    
     if (href.startsWith('#')) {
-      if (pathname === '/contact') {
-        // Navigate to home page with hash
-        router.push(`/${href}`);
+      if (pathname !== '/') {
+        router.push('/' + href);
       } else {
-        // If already on home page, just scroll
         const element = document.querySelector(href);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
@@ -83,7 +80,6 @@ export default function Navigation() {
     } else {
       router.push(href);
     }
-    // Close mobile menu after navigation
     setIsMobileMenuOpen(false);
   };
 
